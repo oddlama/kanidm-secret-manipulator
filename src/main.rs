@@ -24,8 +24,7 @@ struct SecretMappings {
 }
 
 const ACCOUNT_NAME_PATH: &str = "/ent/V2/attrs/name/N8/0";
-const ACCOUNT_PRIMARY_CREDENTIAL_PATH: &str =
-    "/ent/V2/attrs/primary_credential/CR/0/d/password/ARGON2ID";
+const ACCOUNT_PRIMARY_CREDENTIAL_PATH: &str = "/ent/V2/attrs/primary_credential/CR/0/d/password/ARGON2ID";
 
 const OAUTH2_BASIC_SECRET_PATH: &str = "/ent/V2/attrs/oauth2_rs_basic_secret/RU";
 const OAUTH2_NAME_PATH: &str = "/ent/V2/attrs/oauth2_rs_name/N8/0";
@@ -45,8 +44,7 @@ fn main() -> Result<()> {
 
     // Open SQLite database
     let db_path = &args[1];
-    let conn = Connection::open(db_path)
-        .with_context(|| format!("Failed to open database: {}", db_path))?;
+    let conn = Connection::open(db_path).with_context(|| format!("Failed to open database: {}", db_path))?;
 
     // Prepare statement to update rows
     let mut update_stmt = conn
@@ -72,8 +70,7 @@ fn main() -> Result<()> {
         let mut json_data: serde_json::Value = serde_json::from_slice(&data)?;
 
         let mut any_changes = false;
-        any_changes |=
-            rewrite_account_credentials(&mut secret_mappings, &mut json_data).unwrap_or(false);
+        any_changes |= rewrite_account_credentials(&mut secret_mappings, &mut json_data).unwrap_or(false);
         any_changes |= rewrite_oauth2_secret(&mut secret_mappings, &mut json_data).unwrap_or(false);
 
         // Update the row in the database if necessary
@@ -159,10 +156,7 @@ fn rewrite_account_credentials(
     Ok(false)
 }
 
-fn rewrite_oauth2_secret(
-    secret_mappings: &mut SecretMappings,
-    json_data: &mut serde_json::Value,
-) -> Result<bool> {
+fn rewrite_oauth2_secret(secret_mappings: &mut SecretMappings, json_data: &mut serde_json::Value) -> Result<bool> {
     if let Some(name) = json_data
         .pointer(OAUTH2_NAME_PATH)
         .and_then(|value| value.as_str())
