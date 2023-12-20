@@ -23,11 +23,11 @@ struct SecretMappings {
     oauth2_basic_secrets: HashMap<String, String>,
 }
 
-const ACCOUNT_NAME_PATH: &str = "/ent/V2/attrs/name/N8/0";
-const ACCOUNT_PRIMARY_CREDENTIAL_PATH: &str = "/ent/V2/attrs/primary_credential/CR/0/d/password/ARGON2ID";
+const ACCOUNT_NAME_PATH: &str = "/ent/V3/attrs/name/N8/0";
+const ACCOUNT_PRIMARY_CREDENTIAL_PATH: &str = "/ent/V3/attrs/primary_credential/CR/0/d/password/ARGON2ID";
 
-const OAUTH2_BASIC_SECRET_PATH: &str = "/ent/V2/attrs/oauth2_rs_basic_secret/RU/0";
-const OAUTH2_NAME_PATH: &str = "/ent/V2/attrs/oauth2_rs_name/N8/0";
+const OAUTH2_BASIC_SECRET_PATH: &str = "/ent/V3/attrs/oauth2_rs_basic_secret/RU/0";
+const OAUTH2_NAME_PATH: &str = "/ent/V3/attrs/oauth2_rs_name/N8/0";
 
 fn main() -> Result<()> {
     // Read command-line arguments
